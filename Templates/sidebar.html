@@ -1,0 +1,54 @@
+<!-- Widget [Search Bar Widget]-->
+<div class="widget search">
+    <header>
+        <h3 class="h6">Search the blog</h3>
+    </header>
+    <form action="{% url 'blog_search' %}" method="get" class="search-form">
+        <div class="form-group">
+            <input type="search" name="q" placeholder="What are you looking for?">
+            <button type="submit" class="submit"><i class="icon-search"></i></button>
+        </div>
+    </form>
+</div>
+<!-- Widget [Latest Posts Widget]        -->
+<div class="widget latest-posts">
+    <header>
+        <h3 class="h6">Latest Posts</h3>
+    </header>
+    <div class="blog-posts">
+        {% for post in sidebar_recent_posts %}
+            <a href="{{ post.get_absolute_url }}">
+                <div class="item d-flex align-items-center">
+                    <div class="image"><img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid"></div>
+                    <div class="title"><strong>{{ post.title }}</strong>
+                        <div class="d-flex align-items-center">
+                            <div class="comments"><i class="icon-comment"></i>{{ post.post_comments.all.count }}</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+</div>
+<!-- Widget [Categories Widget]-->
+<div class="widget categories">
+    <header>
+        <h3 class="h6">Categories</h3>
+    </header>
+    {% for category in sidebar_categories %}
+        <div class="item d-flex justify-content-between">
+            <a href="{{ category.url }}">{{ category.categories__title }}</a><span>{{ category.categories__count }}</span>
+        </div>
+    {% endfor %}
+</div>
+<!-- Widget [Tags Cloud Widget]-->
+<div class="widget tags">
+    <header>
+        <h3 class="h6">Tags</h3>
+    </header>
+    <ul class="list-inline">
+        {% for tag in sidebar_tags %}
+            <li class="list-inline-item"><a href="{{ tag.get_absolute_url }}" class="tag">#{{ tag.title }}</a></li>
+        {% endfor %}
+        </ul>
+</div>

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mb-5">
+    <h2 class="pt-5">Results:</h2>
+    <hr/>
+    <div class="row">
+        <main class="posts-listing col-lg-8">
+        {% if posts %}
+            <div class="row">
+                {% for post in posts %}
+                    <!-- post -->
+                    <div class="post col-xl-6">
+                        <div class="post-thumbnail"><a href="{{ post.get_absolute_url }}"><img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid"></a></div>
+                        <div class="post-details">
+                            <div class="post-meta d-flex justify-content-between">
+                                <div class="date meta-last">{{ post.timestamp|date:'d'}} {{ post.timestamp|date:'M'}} | {{ post.timestamp|date:'Y'}}</div>
+                                <div class="category">
+                                    {% for category in post.categories.all %}
+                                        <a href="{{ category.get_absolute_url }}">{{ category.title }}</a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <a href="{{ post.get_absolute_url }}"><h3 class="h4">{{ post.title }}</h3></a>
+                            <p class="text-muted">{{ post.overview|truncatewords_html:15 }}</p>
+                            <footer class="post-footer d-flex align-items-center">
+                                <p class="author d-flex align-items-center flex-wrap">
+                                    <div class="avatar"><img src="{{ post.author.image.url }}" alt="..." class="img-fluid"></div>
+                                    <div class="title"><span>{{ post.author }}</span></div>
+                                </p>
+                                <div class="date"><i class="icon-clock"></i> {{ post.timestamp|timesince}} ago</div>
+                                <div class="comments meta-last"><i class="icon-comment"></i>{{ post.post_comments.all.count }}</div>
+                            </footer>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+        <p class="alert alert-info mt-5">We found <b>nothing</b></p>
+        {% endif %}
+        </main>
+        <aside class="col-lg-4">
+            {% include 'sidebar.html' %}
+        </aside>
+    </div>
+</div>
+{% endblock content %}

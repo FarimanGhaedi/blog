@@ -1,1 +1,34 @@
-
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- Hero Section -->
+<section style="background: url( {{ about.hero_background_image.url }} ); background-size: cover; background-position: center center" class="hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <p>{{ about.hero_content|safe }}</p>
+            </div>
+        </div><a href="#main-content" class="continue link-scroll"><i class="fa fa-long-arrow-down"></i> Scroll Down</a>
+    </div>
+</section>
+<!-- Intro Section -->
+<section class="intro" id="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <p>{{ about.main_content|safe }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Map Section -->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <p>{{ about.map|safe }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
