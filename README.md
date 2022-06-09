@@ -34,6 +34,9 @@
 برای استفاده از این پروژه:
     <ul>
         <li>
+            نصب بسته‌های فایل requirements.txt
+        </li>
+        <li>
             اجرای دستورات makemigrations و migrate برای پایگاه داده
         </li>
         <li>
